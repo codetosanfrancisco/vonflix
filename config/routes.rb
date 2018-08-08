@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   root "dashboard#index"
   
   resources :users,only:[:new,:create,:edit,:update]
-  
+  resources :movies do
+    collection do
+      get 'before_new'
+    end
+  end
   #Dashboard path
   get "dashboard/users",to:"dashboard#user",as: :user_dashboard
+  get "dashboard/admin",to:"dashboard#admin",as: :admin_dashboard
   
   #Sign in and sign out path
   get "signin",to:"session#new",as: :signin

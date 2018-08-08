@@ -10,7 +10,8 @@ class SessionController < ApplicationController
     if user && user.authenticate(params[:password]) 
       session[:user_id] = user.id
       flash[:success] = "You have successfully signed in."
-      redirect_to user_dashboard_path
+      redirect_to user_dashboard_path if current_user.user?
+      redirect_to admin_dashboard_path if current_user.admin?
     else
       flash.now[:danger] = "Incorrect email or password, try again."
       render :new

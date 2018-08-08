@@ -1,0 +1,46 @@
+<%= form_for @movie,html:{id:"new-movie-form",class:"form-horizontal",role:"form"} do |f|%>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                    <p>Title : <%= get_session(:title)%></p>
+                    <p>Description : <%= get_session(:description)%></p>
+                    <p>Year : <%= get_session(:year)%></p>
+                    <p>Directed by : <%= get_session(:director)%></p>
+                    <p>Age : <%= get_session(:age)%></p>
+                    <p>Hour : <%= get_session(:hour)%></p>
+                    <p>Minute : <%= get_session(:minute)%></p>
+            </div>
+            <div class="form-group">
+               <%= f.label :image,"Cover Image"%>
+               <%= f.file_field :image%>
+            </div>
+            <div class="form-group">
+               <%= f.label :video,"Videos"%>
+               <%= f.file_field :video%>
+            </div>
+            <div class="form-group">
+               <%= f.label :starring,"Number of starring (#{pluralize(get_session(:number_of_starring),"starring")}) : "%>
+                <div class="row padding-all-xs">
+                      <%  get_session(:number_of_starring).times do |index|%>
+                        <div class="col-md-6 form-group"><%= f.text_field "starring",placeholder:"eg: Dwayne Johnson",multiple:true%></div>
+                      <% end %>
+                 </div>
+            </div> 
+        </div>
+        <div class="col-md-6">
+             <%= f.fields_for :movie_detail do |detail_form| %>
+              <%= detail_form.label :cast,"Number of cast (#{pluralize(get_session(:number_of_cast),"cast")}) : "%>
+                  <div class="row padding-all-xs">
+                      <% get_session(:number_of_cast).times do |index|%>
+                        <div class="col-md-6 form-group"><%= detail_form.text_field "cast",placeholder:"eg: Dwayne Johnson",multiple:true%></div>
+                      <% end %>
+                  </div>
+            <% end %>
+            
+        <div class="form-group">
+           <%= f.submit "Create",class:"btn btn-default"%>
+        </div> 
+        </div>
+    </div>
+
+<% end %>

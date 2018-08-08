@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  year: MyString
+  age: MyString
+  hour: 1
+  minute: 1
+  starring: MyText
+  view: 1
+  genres: MyText
+  director: MyText
+  description: MyText
+
+two:
+  title: MyString
+  year: MyString
+  age: MyString
+  hour: 1
+  minute: 1
+  starring: MyText
+  view: 1
+  genres: MyText
+  director: MyText
+  description: MyText

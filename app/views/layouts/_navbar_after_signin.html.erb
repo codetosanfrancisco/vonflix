@@ -1,20 +1,34 @@
 <nav id="navbar-default" class="margin-bottom-sm">
-  <div class="container">
+  <div class="container-fluid">
     <div id="navbar-first-div" class="row">
-      <div class="col-md-10 col-xs-12">
-        <div class="col-md-3">
-          <div class="padding-all-sm">Welcome <%= @user.full_name%> !</div>
+      <div class="col-md-8 col-xs-12">
+        <div class="col-md-5">
+          <% if signed_in? %>
+            <div class="padding-all-sm">
+              <span class="padding-side-sm"><i class="fas fa-user"></i><%= current_user.full_name%> </span>
+              <span class="padding-side-sm"><%= link_to "My Playlist","#",class:"font-color-red"%></span>
+              <span class="padding-side-sm"><%= link_to "My History","#",class:"font-color-red"%></span>
+            </div>
+          <% end %>
         </div>
         <div class="col-md-2 col-md-offset-2 col-xs-7 col-xs-5">
           <%= link_to(image_tag("navbar_logo.png",class:"image-small"),root_path)%>
         </div>
       </div>
-      <div class="col-md-2 col-xs-12 padding-all-sm">
-        <% if signed_in? %>
-          <%= link_to "Sign out",signout_path,class:"btn btn-default",method: :delete%>
-        <% else %>
-          <%= link_to "Sign in",signin_path,class:"btn btn-default"%>
-        <% end %>
+      <div class="col-md-4 col-xs-12 padding-all-sm">
+        <div class="col-md-8">
+          <%= form_tag "#" do %>
+            <%= submit_tag "Search",class:"btn btn-default"%>
+            <%= text_field_tag :search,nil,class:"transparent-background no-border padding-side-sm",placeholder:"search something..."%>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+          <% if signed_in? %>
+            <%= link_to "Sign out",signout_path,class:"btn btn-default",method: :delete%>
+          <% else %>
+            <%= link_to "Sign in",signin_path,class:"btn btn-default"%>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  adjective: MyText
+  audio: MyText
+  subtitle: MyText
+  cast: MyText
+
+two:
+  adjective: MyText
+  audio: MyText
+  subtitle: MyText
+  cast: MyText

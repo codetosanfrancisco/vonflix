@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
@@ -72,4 +73,32 @@
 }
 #navbar-default{
     background-color: #010101
+}
+.padding-side-sm{
+    padding:0 10px;
+}
+.transparent-background{
+    background-color: transparent;
+}
+.no-border{
+    border:0;
+}
+#new-movie-form input[type=text]{
+    background-color: transparent;
+    border:0;
+    border-bottom: 0.5px solid #fff;
+    border-radius:0;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: grey;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: grey;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: grey;
 }
