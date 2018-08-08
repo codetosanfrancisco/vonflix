@@ -1,0 +1,30 @@
+
+<div class="padding-all-xs">
+    <h1 class="font-color-red bold">Sign in</h1>
+    <h1 class="font-color-red bold">to Vonflix!</h1>
+</div>
+<%= form_tag :signin,method: :post,html:{class:"form-horizontal",role:"form"} do |f|%>
+    <div class="form-group">
+        <%= label_tag :email,"Email"%>
+        <div class="row">
+            <div class="col-md-5">
+                 <%= email_field_tag :email,nil,class:"form-control",placeholder:"eg:sullivan@gmail.com"%>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <%= label_tag :password,"Password"%>
+        <div class="row">
+            <div class="col-md-5">
+                <%= password_field_tag :password,nil,class:"form-control",placeholder:"eg:123456....."%>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <%= submit_tag "Sign in",class:"btn btn-default"%>
+        <span class="padding-all-xs"><%= link_to "Haven't got an account yet?Sign up here!",new_user_path %></span>
+    </div>
+    
+<% end %>

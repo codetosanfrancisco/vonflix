@@ -1,0 +1,65 @@
+<% if @user.errors.any?%>
+    <div class="alert alert-danger" role="alert">
+        <%= content_tag "div","There are #{pluralize(@user.errors.size,'error')} prevent you from signing up :",class:"padding-all-xs font-md"%>
+        <% @user.errors.full_messages.each do |error| %>
+            <%= content_tag "li",error%>
+        <% end %>
+    </div>
+<% end %>
+<div class="padding-all-xs">
+    <h1 class="font-color-red bold">Sign up for</h1>
+    <h1 class="font-color-red bold">for Vonflix!</h1>
+</div>
+<%= form_for @user,html:{role:"form",class:"form-horizontal"} do |f|%>
+    
+    <div class="form-group">
+         <%= f.label :firstname,"Firstname"%>
+        <div class="row">
+            <div class="col-md-5">
+                <%= f.text_field :firstname,class:"form-control",placeholder:"eg:Donald"%>
+            </div>
+        </div>
+    </div>
+   
+    <div class="form-group">
+        <%= f.label :lastname,"Lastname"%>
+        <div class="row">
+            <div class="col-md-5">
+                 <%= f.text_field :lastname,class:"form-control",placeholder:"eg:Sullivan"%>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+       <%= f.label :email%>
+        <div class="row">
+            <div class="col-md-5">
+                 <%= f.email_field :email,class:"form-control",placeholder:"eg:sullivan@gmail.com"%>
+            </div>
+        </div>
+   </div>
+    
+    <div class="form-group">
+        <%= f.label :password %>
+        <div class="row">
+            <div class="col-md-5">
+                 <%= f.password_field :password,class:"form-control",placeholder:"eg:123456...."%>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :password_confirmation%>
+        <div class="row">
+            <div class="col-md-5">
+                 <%= f.password_field :password_confirmation,class:"form-control",placeholder:"eg:123456...." %>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <%= f.submit "Sign up",class:"btn btn-default"%>
+        <span class="padding-all-xs"><%= link_to "Have an account already?Sign in here!",signin_path %></span>
+    </div>
+    
+<% end %>

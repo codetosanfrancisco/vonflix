@@ -1,0 +1,28 @@
+<% content_for :dashboard_index do%>
+  <nav id="navbar" class="margin-bottom-sm">
+    <div id="navbar-first-div" class="row">
+      <div class="col-md-10 col-xs-12">
+        <div class="col-md-2 col-md-offset-6 col-xs-7 col-xs-5">
+          <%= link_to(image_tag("navbar_logo.png",class:"image-small"),root_path)%>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12">
+        <% if signed_in? %>
+          <%= link_to "Sign out",signout_path,class:"btn btn-default",method: :delete%>
+        <% else %>
+          <%= link_to "Sign in",signin_path,class:"btn btn-default"%>
+        <% end %>
+      </div>
+    </div>
+    <div class="center-align-absolute" align="center">
+      <div>
+        <h1>See what's next.</h1>
+        <h2>WATCH ANYWHERE,ANYTIME.</h2>
+      </div>
+      <div>
+        <%= link_to "Join for free!",new_user_path,class:"btn btn-default padding-all-sm font-lg"%>
+      </div>
+    </div>
+    
+  </nav>
+<% end %>

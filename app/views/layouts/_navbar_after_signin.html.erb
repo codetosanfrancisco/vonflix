@@ -1,0 +1,21 @@
+<nav id="navbar-default" class="margin-bottom-sm">
+  <div class="container">
+    <div id="navbar-first-div" class="row">
+      <div class="col-md-10 col-xs-12">
+        <div class="col-md-3">
+          <div class="padding-all-sm">Welcome <%= @user.full_name%> !</div>
+        </div>
+        <div class="col-md-2 col-md-offset-2 col-xs-7 col-xs-5">
+          <%= link_to(image_tag("navbar_logo.png",class:"image-small"),root_path)%>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12 padding-all-sm">
+        <% if signed_in? %>
+          <%= link_to "Sign out",signout_path,class:"btn btn-default",method: :delete%>
+        <% else %>
+          <%= link_to "Sign in",signin_path,class:"btn btn-default"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
