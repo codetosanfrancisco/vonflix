@@ -1,6 +1,6 @@
 <%= content_tag("div",(image_tag @movie.images[0].url))%>
 <%= @movie.title%>
 <%= truncate(@movie.description,length:100)%>
-<%= content_tag("div",(link_to "Watch alone","#"))%>
-<%= content_tag("div",(link_to "Watch with friends","#"))%>
+<%= content_tag("div",(link_to "Watch alone",watch_alone_movie_path(@movie)))%>
+<%= content_tag("div",(link_to "Watch with friends",watch_with_friends_movie_path(@movie)))%>
 <%= content_tag("div",(link_to "Go back",:back))%>

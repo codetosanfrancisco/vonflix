@@ -18,6 +18,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 gem "font-awesome-rails"
 gem "carrierwave"
+gem 'owlcarousel-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

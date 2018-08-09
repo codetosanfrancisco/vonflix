@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-    before_action :get_movie,only:[:show]
+    before_action :get_movie,only:[:show,:watch_alone]
     helper_method :get_session
     
     def new
@@ -35,6 +35,14 @@ class MoviesController < ApplicationController
         
     end
     
+    def watch_alone
+        
+    end
+    
+    def watch_with_friends
+        
+    end
+  
     private
     def get_session(key)
         session[key]

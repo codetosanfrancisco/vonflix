@@ -1,0 +1,22 @@
+#progress-bar-bg{
+    height:10px;
+    background-color: black;
+    width: 400px;
+}
+#volume-bar-bg{
+    height:10px;
+    background-color: black;
+    width: 200px;
+}
+#progress-bar,#volume-bar{
+    height:5px;
+    width: 0px;
+    background-color: #e50914;
+}
+video,.icons{
+    cursor: pointer;
+}
+
+.hidden{
+    visibility: hidden;
+}
