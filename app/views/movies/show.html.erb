@@ -34,7 +34,14 @@
             <%= @movie.detail.subtitle.join(" , ")%>
         </div>
         <div class="row padding-all-xs">
-            <%= content_tag("div",(link_to "Go back",:back,class:"btn btn-default margin-bottom-xs"))%>
+            <%= content_tag("span",(link_to "Go back",:back,class:"btn btn-default"))%>
+            <% unless current_user.playlist.movies.include?(@movie)%>
+                <span>
+                    <%= link_to "Add to playlist",movie_playlist_movies_path(@movie),method: :post,class:"btn btn-default"%>
+                </span>
+            <% else %>
+                <button class="btn btn-default">Already added to playlist!</button>
+            <% end %>
         </div>
     </div>
     <div class="col-md-2">
@@ -45,6 +52,6 @@
 <script>
     $(".owl-carousel").owlCarousel({
         items:1,
-        loop:true
+        loop:true,
     });
 </script>

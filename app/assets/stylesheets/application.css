@@ -134,3 +134,9 @@
 .owl-carousel{
     cursor: move;
 }
+.red-background{
+    background-color: #e50914
+}
+.black-background{
+    background-color: black;
+}

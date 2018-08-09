@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     end
     get "watch_alone",on: :member
     get "watch_with_friends",on: :member
+    
+    resources :playlist_movies,only:[:create]
   end
+  
+  resources :playlists,only:[:show]
   
   #Dashboard path
   get "dashboard/users",to:"dashboard#user",as: :user_dashboard

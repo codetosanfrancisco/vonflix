@@ -1,0 +1,33 @@
+<% @movies.each do |m|%>
+    <div class="panel black-background">
+      <div class="panel-body">
+        <div class="div col-md-2">
+            <div class="owl-carousel">
+                <% m.images.each do |image|%>
+                    <div><%= image_tag image.url,style:"height:100px;"%></div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4>
+                <%= link_to m.title,movie_path(m),class:"font-color-red"%>
+            </h4>
+            <div>
+                <%= truncate(m.description,length:300)%>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <%= content_tag("div",(link_to "Watch alone",watch_alone_movie_path(m),class:"btn btn-default margin-bottom-xs"))%>
+            <%= content_tag("div",(link_to "Watch with friends",watch_with_friends_movie_path(m),class:"btn btn-default margin-bottom-xs"))%>
+        </div>
+      </div>
+    </div>
+    
+<% end %>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        items:1,
+        margin:10
+    })
+</script>

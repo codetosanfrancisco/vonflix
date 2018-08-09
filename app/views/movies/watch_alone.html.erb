@@ -49,7 +49,10 @@
 </div>
 
 <script>
-    $(".owl-carousel").owlCarousel();
+    $(".owl-carousel").owlCarousel({
+        items:3,
+        loop:true
+    });
     var show_play_button = function(){
         $('#play').show();
         $('#pause').hide();

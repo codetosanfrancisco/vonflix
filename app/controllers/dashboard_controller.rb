@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
     
     def user
         @movies = Movie.all
+        @sample = @movies.sample
     end
     
     def admin

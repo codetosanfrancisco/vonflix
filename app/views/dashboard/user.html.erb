@@ -1,5 +1,28 @@
-<% @movies.each do |movie|%>
-    <%= content_tag "div",movie.title%>
-    <%= content_tag "div",truncate(movie.description,length:100)%>
-    <%= link_to "See More",movie_path(movie)%>
-<% end %>
+<div class="jumbotron">
+  <h1><%= @sample.title%></h1>
+  <p><%= truncate(@sample.description,length:200)%></p>
+  <p><%= link_to "Show more",movie_path(@sample),class:"btn btn-lg btn-default"%></p>
+</div>
+<div class="owl-carousel">
+    <% @movies.each do |movie|%>
+        <div>
+            <%= content_tag "div",(image_tag movie.images[-1].url)%>
+            <%= content_tag "div",movie.title%>
+            <%= content_tag "div",truncate(movie.description,length:100)%>
+            <%= link_to "See More",movie_path(movie)%>
+        </div>
+    <% end %>
+</div>
+
+<script>
+    let imageUrl = "<%= j(@sample.images[0].url)%>"
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        items:4,
+        margin:10
+    })
+    $(".jumbotron").css({
+        'background-image' : 'url(' + imageUrl + ')',
+        'background-size' : 'cover'
+    })
+</script>
