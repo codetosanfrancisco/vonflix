@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    before_action :get_movie,only:[:show]
     helper_method :get_session
     
     def new
@@ -30,6 +31,10 @@ class MoviesController < ApplicationController
         redirect_to admin_dashboard_path
     end
     
+    def show
+        
+    end
+    
     private
     def get_session(key)
         session[key]
@@ -43,5 +48,9 @@ class MoviesController < ApplicationController
     def detail_params
         {adjective: params[:movie][:movie_detail][:adjective],audio: params[:movie][:movie_detail][:audio],subtitle: params[:movie][:movie_detail][:subtitle],
         cast: params[:movie][:movie_detail][:cast]}
+    end
+    
+    def get_movie
+        @movie = Movie.find(params[:id])
     end
 end
