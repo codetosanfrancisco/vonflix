@@ -6,6 +6,8 @@ class User < ApplicationRecord
     has_secure_password
     enum role: [ :user,:admin ]
     has_one :playlist
+    has_many :histories
+    has_many :movies,through: :histories
     def full_name
         [firstname,lastname].join(' ')
     end

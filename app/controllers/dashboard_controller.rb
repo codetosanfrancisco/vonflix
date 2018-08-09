@@ -13,4 +13,8 @@ class DashboardController < ApplicationController
     
     def admin
     end
+    
+    def my_history
+        @movies = current_user.movies
+    end
 end

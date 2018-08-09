@@ -36,11 +36,11 @@ class MoviesController < ApplicationController
     end
     
     def watch_alone
-        
+        current_user.movies << @movie unless current_user.movies.include?(@movie)
     end
     
     def watch_with_friends
-        
+        current_user.movies << @movie unless current_user.movies.include?(@movie)
     end
   
     private

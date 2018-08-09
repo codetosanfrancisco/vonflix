@@ -7,7 +7,7 @@
             <div class="padding-all-sm">
               <span class="padding-side-sm"><%= fa_icon "user"%> <%= current_user.full_name%> </span>
               <span class="padding-side-sm"><%= link_to "My Playlist",playlist_path(current_user.playlist),class:"font-color-red"%></span>
-              <span class="padding-side-sm"><%= link_to "My History","#",class:"font-color-red"%></span>
+              <span class="padding-side-sm"><%= link_to "My History",my_history_path,class:"font-color-red"%></span>
             </div>
           <% end %>
         </div>

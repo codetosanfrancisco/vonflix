@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_055949) do
+ActiveRecord::Schema.define(version: 2018_08_09_155331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2018_08_09_055949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_details_on_movie_id"
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_histories_on_movie_id"
+    t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -82,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_055949) do
     t.integer "role", default: 0
   end
 
+  add_foreign_key "histories", "movies"
+  add_foreign_key "histories", "users"
   add_foreign_key "playlist_movies", "movies"
   add_foreign_key "playlist_movies", "playlists"
   add_foreign_key "playlists", "users"
