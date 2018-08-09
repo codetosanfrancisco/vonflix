@@ -48,6 +48,9 @@
 .margin-bottom-sm{
     margin-bottom:30px;
 }
+.margin-bottom-xs{
+    margin-bottom: 15px;
+}
 .center-align-absolute{
   position: absolute;
   top:50%;
@@ -127,4 +130,7 @@
   left: 0;
   top: 0;
   opacity: 0;
+}
+.owl-carousel{
+    cursor: move;
 }
