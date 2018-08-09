@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get "dashboard/users",to:"dashboard#user",as: :user_dashboard
   get "dashboard/myhistory",to:"dashboard#my_history",as: :my_history
   get "dashboard/admin",to:"dashboard#admin",as: :admin_dashboard
+  get "dashboard/search",to:"dashboard#search",as: :search_dashboard
   
   #Sign in and sign out path
   get "signin",to:"session#new",as: :signin
