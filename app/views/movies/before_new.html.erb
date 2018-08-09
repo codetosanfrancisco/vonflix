@@ -7,7 +7,7 @@
                 <%= label_tag :title%>
                 <div class="row">
                     <div class="col-md-8">
-                         <%= text_field_tag :title,nil,placeholder:"eg:Skyscraper",class:"form-control",required:true%>
+                         <%= text_field_tag :title,nil,placeholder:"eg:Skyscraper",class:"form-control"%>
                     </div>
                 </div>
             </div>
@@ -15,15 +15,15 @@
                 <%= label_tag :year%>
                 <div class="row">
                     <div class="col-md-8">
-                         <%= text_field_tag :year,nil,placeholder:"eg:2018",class:"form-control",required:true%>
+                         <%= text_field_tag :year,nil,placeholder:"eg:2018",class:"form-control"%>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <%= label_tag :director,"Directed by:"%>
+                <%= label_tag :director,"Directed by"%>
                 <div class="row">
                     <div class="col-md-8">
-                         <%= text_field_tag :director,nil,placeholder:"Nicholas Cage",class:"form-control",required:true%>
+                         <%= text_field_tag :director,nil,placeholder:"Nicholas Cage",class:"form-control"%>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <%= label_tag :description%>
                 <div class="row">
                     <div class="col-md-8">
-                         <%= text_field_tag :description,nil,placeholder:"Modern treasure hunters search for a chest of riches rumored to have been stashed away by George Washington, Thomas Jefferson and Benjamin Franklin.",class:"form-control",required:true%>
+                         <%= text_area_tag :description,nil,rows:10,placeholder:"Modern treasure hunters search for a chest of riches rumored to have been stashed away by George Washington, Thomas Jefferson and Benjamin Franklin.",class:"form-control",required:true%>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <%= label_tag :number_of_starring%>
                 <div class="row">
                     <div class="col-md-8">
-                         <%= text_field_tag :number_of_starring,nil,placeholder:"eg:2",class:"form-control",required:true%>
+                         <%= text_field_tag :number_of_starring,nil,placeholder:"eg:2",class:"form-control"%>
                     </div>
                 </div>
             </div>
@@ -74,6 +74,22 @@
                 <div class="row">
                     <div class="col-md-8">
                          <%= text_field_tag :number_of_cast,nil,placeholder:"eg:8",class:"form-control",required:true%>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= label_tag :audio,"Number of audio available"%>
+                <div class="row">
+                    <div class="col-md-8">
+                         <%= text_field_tag :audio,nil,placeholder:"eg:8",class:"form-control",required:true%>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= label_tag :subtitle,"Number of subtitle available"%>
+                <div class="row">
+                    <div class="col-md-8">
+                         <%= text_field_tag :subtitle,nil,placeholder:"eg:8",class:"form-control",required:true%>
                     </div>
                 </div>
             </div>

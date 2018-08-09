@@ -10,30 +10,81 @@
                     <p>Hour : <%= get_session(:hour)%></p>
                     <p>Minute : <%= get_session(:minute)%></p>
             </div>
-            <div class="form-group">
-               <%= f.label :image,"Cover Image"%>
-               <%= f.file_field :image%>
-            </div>
-            <div class="form-group">
-               <%= f.label :video,"Videos"%>
-               <%= f.file_field :video%>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                       <%= f.label :images,"Cover Image"%>
+                       <div class="row">
+                            <div class="col-md-8">
+                                <div class="upload-btn-wrapper">
+                                  <button class="btn btn-upload-file">Upload Image file</button>
+                                  <%= f.file_field :images, multiple: true%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                       <%= f.label :video,"Videos"%>
+                       <div class="row">
+                            <div class="col-md-8">
+                                <div class="upload-btn-wrapper">
+                                  <button class="btn btn-upload-file">Upload Video file</button>
+                                  <%= f.file_field :video%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                <%= f.label :starring,"Number of starring (#{pluralize(get_session(:number_of_starring),"starring")}) : "%>
-                <div class="row padding-all-xs">
+                <div class="row">
                       <%  get_session(:number_of_starring).times do |index|%>
-                        <div class="col-md-6 form-group"><%= f.text_field "starring",placeholder:"eg: Dwayne Johnson",multiple:true%></div>
+                        <div class="col-md-6 form-group"><%= f.text_field :starring,placeholder:"eg: Dwayne Johnson",multiple:true%></div>
                       <% end %>
-                 </div>
-            </div> 
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 padding-all-xs">
              <%= f.fields_for :movie_detail do |detail_form| %>
               <%= detail_form.label :cast,"Number of cast (#{pluralize(get_session(:number_of_cast),"cast")}) : "%>
-                  <div class="row padding-all-xs">
+                  <div class="row ">
                       <% get_session(:number_of_cast).times do |index|%>
-                        <div class="col-md-6 form-group"><%= detail_form.text_field "cast",placeholder:"eg: Dwayne Johnson",multiple:true%></div>
+                        <div class="col-md-6 form-group"><%= detail_form.text_field :cast,placeholder:"eg: Dwayne Johnson",multiple:true%></div>
                       <% end %>
+                  </div>
+                  <div>
+                      <h2 class="font-color-red">Further details : </h2>
+                  </div>
+                  <div class="form-group">
+                       <%= detail_form.label :adjective,"This movie is ..."%>
+                       <div class="row">
+                            <div class="col-md-8">
+                                <%= detail_form.text_field :adjective,class:"form-control"%>
+                            </div>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <%= detail_form.label :audio,"Audio Available (At least 1)"%>
+                       <div class="row">
+                                <%= get_session(:number_of_audio).times do %>
+                                    <div class="col-md-6 form-group">
+                                        <%= detail_form.text_field :audio,placeholder:"eg: English [Original]",multiple:true%>
+                                    </div>
+                                <% end %>
+                       </div>
+                  </div>
+                  <div class="form-group">
+                       <%= detail_form.label :subtitle,"Subtitle Available (At least 1)"%>
+                       <div class="row">
+                                <%= get_session(:number_of_subtitle).times do %>
+                                    <div class="col-md-6 form-group">
+                                        <%= detail_form.text_field :subtitle,placeholder:"eg: English",multiple:true%>
+                                    </div>
+                                <% end %>
+                       </div>
                   </div>
             <% end %>
             

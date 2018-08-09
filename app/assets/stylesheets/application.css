@@ -83,13 +83,14 @@
 .no-border{
     border:0;
 }
-#new-movie-form input[type=text]{
+#new-movie-form input[type=text],#new-movie-form textarea,#new-movie-form select,#new-movie-form select option{
     background-color: transparent;
     border:0;
     border-bottom: 0.5px solid #fff;
     border-radius:0;
 }
 
+/*Styling the placeholder*/
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: grey;
     opacity: 1; /* Firefox */
@@ -101,4 +102,27 @@
 
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: grey;
+}
+
+/*Styling file field button*/
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload-file {
+  color: white;
+  background-color:#e50914;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }

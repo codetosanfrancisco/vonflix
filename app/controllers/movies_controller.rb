@@ -11,6 +11,8 @@ class MoviesController < ApplicationController
         session[:age] = params[:age]
         session[:hour] = params[:hour]
         session[:minute] = params[:minute]
+        session[:number_of_audio] = params[:audio].to_i
+        session[:number_of_subtitle] = params[:subtitle].to_i
         @movie = Movie.new
         respond_to do |format|
             format.js 
@@ -22,11 +24,24 @@ class MoviesController < ApplicationController
     end
     
     def create
-        byebug
+        @movie = Movie.new(movie_params).save
+        Movie.last.create_detail(detail_params)
+        flash[:success] = "Movie is successfully added."
+        redirect_to admin_dashboard_path
     end
     
     private
     def get_session(key)
         session[key]
+    end
+    
+    def movie_params
+        {title: get_session(:title),year: get_session(:year),age: get_session(:age),hour: get_session(:hour),minute: get_session(:minute),
+        description: get_session(:description),starring: params[:movie][:starring],director: get_session(:director),video: params[:movie][:video],images: params[:movie][:images]}
+    end
+    
+    def detail_params
+        {adjective: params[:movie][:movie_detail][:adjective],audio: params[:movie][:movie_detail][:audio],subtitle: params[:movie][:movie_detail][:subtitle],
+        cast: params[:movie][:movie_detail][:cast]}
     end
 end
