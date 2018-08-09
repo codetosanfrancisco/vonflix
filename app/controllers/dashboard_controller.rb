@@ -19,5 +19,6 @@ class DashboardController < ApplicationController
     end
     
     def search
+        @movies = Movie.search(params[:search])
     end
 end
