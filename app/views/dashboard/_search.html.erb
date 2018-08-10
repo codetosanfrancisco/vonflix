@@ -18,11 +18,11 @@
                 <div>
                     <%= truncate(m.description,length:300)%>
                 </div>
-                <% if params[:controller] == 'dashboard'%>
+                <% if params[:controller] == 'dashboard' && params[:action] == "my_history"%>
                     <div>
                         <small>You watched this <%= time_ago_in_words(current_user.histories.find_by_movie_id(m.id).created_at)%> ago</small>
                     </div>
-                <%else%>
+                <%elsif params[:action] == 'show' && params[:controller] == 'playlists' %>
                     <div>
                         <small>You added this <%= time_ago_in_words(current_user.playlist.playlist_movies.find_by_movie_id(m.id).created_at)%> ago</small>
                     </div>
