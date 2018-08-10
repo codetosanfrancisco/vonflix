@@ -16,3 +16,4 @@ App.messages = App.cable.subscriptions.create "MessagesChannel",
       $('#messages').last().hide()
     else
       $('.panel-body').prepend(data)
+      $('.chat').val("")

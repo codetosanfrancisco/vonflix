@@ -22,7 +22,7 @@
                  </div>
                  <div class="panel-heading red-background">
                      <%= form_tag :messages,remote:true,method: :post do %>
-                             <%= text_field_tag :message,nil,class:"form-control"%>
+                             <%= text_field_tag :message,nil,class:"form-control chat"%>
                              <%= submit_tag "Post",class:"btn black-background form-control margin-top-sm"%>
                      <% end %>
                  </div>

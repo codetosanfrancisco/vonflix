@@ -166,3 +166,7 @@
 .grey-background{
     background-color:#141414;
 }
+
+.flex-container{
+    display:flex;
+}
