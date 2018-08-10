@@ -6,9 +6,10 @@ class Movie < ApplicationRecord
     def self.search(thingy)
         array = thingy.split
         unless array.length > 1
-            where("title LIKE ? or description LIKE ? ","%#{thingy}%","%#{thingy}%")
+            where("title ILIKE :title or description ILIKE :description or array_to_string(starring,'||') ILIKE :starring",starring:"%#{thingy}%",title:"%#{thingy}%",description:"%#{thingy}%")
         else
-            where("title LIKE ? or description LIKE ? or title LIKE ? or description LIKE ?","%#{thingy[0]}%","%#{thingy[1]}%","%#{thingy[1]}%","%#{thingy[0]}%")
+            where("title ILIKE :title1 or description ILIKE :description1 or array_to_string(starring,'||') ILIKE :starring1 or title ILIKE :title2 or description ILIKE :description2 or array_to_string(starring,'||') ILIKE :starring2",title1:"%#{thingy[0]}%",description1:"%#{thingy[1]}%",starring1:"%#{thingy[0]}%",
+            title2:"%#{thingy[1]}%",description2:"%#{thingy[0]}%",starring2:"%#{thingy[1]}%")
         end
     end
 end

@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     def current_user
         @user ||= User.find(session[:user_id]) if session[:user_id]
     end
+    
+    def current_room
+        @room ||= Room.find(session[:room_id]) if session[:room_id]
+    end
 end

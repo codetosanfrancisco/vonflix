@@ -1,0 +1,36 @@
+<div class="panel red-border black-background">
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="owl-carousel">
+                <% @movie.images.each do |image|%>
+                    <div>
+                        <%= image_tag image.url,style:"height:300px"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-12 padding-all-sm">
+            <h4 class="text-center">You have invitation for <strong><%= @movie.title%></strong> ?</h4>
+            <h4 class="text-center">Fill in the invitation code here :</h4>
+            <div align="center">
+                <%= form_tag [:verify_invitation,@movie] do %>
+                    <div>
+                        <%= text_area_tag :invitation_code,nil,class:"black-background font-md"%>
+                    </div>
+                    <div>
+                        <%= submit_tag "Verify",class:"btn btn-default"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(".owl-carousel").owlCarousel({
+        items:3,
+        loop:true,
+        margin:10
+    });
+</script>

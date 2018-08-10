@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/create'
   get 'histories/create'
   get 'watch/watch_alone'
   get 'watch/watch_with_friends'
@@ -10,15 +11,19 @@ Rails.application.routes.draw do
     collection do
       get 'before_new'
     end
-    get "watch_alone",on: :member
-    get "watch_with_friends",on: :member
-    
+    member do
+      get 'create_invitation'
+      get 'accept_invitation'
+      get "watch_alone"
+      get "watch_with_friends"
+      post "verify_invitation"
+      get "watch_together"
+    end
     resources :playlist_movies,only:[:create]
-    
   end
   
   resources :playlists,only:[:show]
-  
+  resources :messages,only: [:create]
   #Dashboard path
   get "dashboard/users",to:"dashboard#user",as: :user_dashboard
   get "dashboard/myhistory",to:"dashboard#my_history",as: :my_history

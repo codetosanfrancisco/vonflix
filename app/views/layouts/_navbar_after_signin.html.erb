@@ -17,7 +17,7 @@
       </div>
       <div class="col-md-4 col-xs-12 padding-all-sm">
         <div class="col-md-8">
-          <%= form_tag :search_dashboard do %>
+          <%= form_tag :search_dashboard,remote:true do %>
             <button type="submit" class="btn btn-default"><%= fa_icon "search"%></button>
             <%= text_field_tag :search,nil,class:"transparent-background no-border padding-side-sm",placeholder:"Movie title,starring,cast..."%>
           <% end %>

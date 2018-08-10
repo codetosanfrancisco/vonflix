@@ -20,5 +20,8 @@ class DashboardController < ApplicationController
     
     def search
         @movies = Movie.search(params[:search])
+        respond_to do |format|
+            format.js
+        end
     end
 end

@@ -8,6 +8,8 @@ class User < ApplicationRecord
     has_one :playlist
     has_many :histories
     has_many :movies,through: :histories
+    has_many :invitations
+    has_many :rooms,through: :invitations
     def full_name
         [firstname,lastname].join(' ')
     end

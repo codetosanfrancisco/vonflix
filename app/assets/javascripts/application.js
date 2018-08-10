@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require clipboard
 //= require owl.carousel
 //= require bootstrap-sprockets
 //= require activestorage

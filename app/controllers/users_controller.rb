@@ -12,6 +12,7 @@ class UsersController < ApplicationController
      
     if @user.save
       # If user saves in the db successfully:
+      @user.create_playlist(name: @user.full_name + "'s playlist")
       session[:user_id] = @user.id #Put the user id in the session
       flash[:success] = "You have signed up successfully."
       redirect_to user_dashboard_path

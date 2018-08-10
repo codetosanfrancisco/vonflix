@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_155331) do
+ActiveRecord::Schema.define(version: 2018_08_10_103413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,35 @@ ActiveRecord::Schema.define(version: 2018_08_09_155331) do
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_histories_on_movie_id"
     t.index ["user_id"], name: "index_histories_on_user_id"
+  end
+
+  create_table "invitation_users", force: :cascade do |t|
+    t.bigint "friend_id"
+    t.bigint "invitation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_invitation_users_on_friend_id"
+    t.index ["invitation_id"], name: "index_invitation_users_on_invitation_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "movie_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_invitations_on_movie_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -75,6 +104,14 @@ ActiveRecord::Schema.define(version: 2018_08_09_155331) do
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "invitation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitation_id"], name: "index_rooms_on_invitation_id"
+  end
+
   create_table "subtitles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -93,6 +130,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_155331) do
 
   add_foreign_key "histories", "movies"
   add_foreign_key "histories", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "playlist_movies", "movies"
   add_foreign_key "playlist_movies", "playlists"
   add_foreign_key "playlists", "users"

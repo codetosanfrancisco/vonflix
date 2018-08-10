@@ -1,0 +1,44 @@
+<div class="panel red-border black-background">
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="owl-carousel">
+                <% @movie.images.each do |image|%>
+                    <div>
+                        <%= image_tag image.url,style:"height:300px"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-12 padding-all-sm">
+            <h4 class="text-center">You have created invitation for <strong><%= @movie.title%></strong></h4>
+            <h4 class="text-center">You can invite up to 5 people <small>including you!</small></h4>
+            <h4 class="text-center">Use this invitation code to invite your friends!</h4>
+            <div align="center">
+                <div>
+                    <textarea class="text-center black-background font-md" id="bar"><%= @random_string%></textarea>
+                </div>
+                <div>
+                    <button class="clipboard-btn btn btn-default" data-clipboard-action="copy" data-clipboard-target="#bar">
+                        Copy 
+                    </button>
+                </div>
+                <div>
+                    <p><%= link_to "Click here to start watching!",watch_together_movie_path(@movie,room: @invitation.room.id)%></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function(){  
+      var clipboard = new Clipboard('.clipboard-btn');
+    });
+    
+    $(".owl-carousel").owlCarousel({
+        items:3,
+        loop:true,
+        margin:10
+    });
+</script>

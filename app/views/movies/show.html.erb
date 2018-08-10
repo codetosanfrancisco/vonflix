@@ -1,52 +1,54 @@
-<div class="row">
-    <div class="col-md-10">
-        <div class="owl-carousel">
-                    <% @movie.images.each do |image|%>
-                        <div><%= image_tag image.url,style:"height:500px;"%></div>
-                    <% end %>
-                </div>
-        <div class="row padding-all-xs">
-            <h3 class="font-color-red"><%= @movie.title%></h3> 
+<div id="wrapper">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="owl-carousel">
+                        <% @movie.images.each do |image|%>
+                            <div><%= image_tag image.url,style:"height:500px;"%></div>
+                        <% end %>
+                    </div>
+            <div class="row padding-all-xs">
+                <h3 class="font-color-red"><%= @movie.title%></h3> 
+            </div>
+            <div class="row padding-all-xs">
+                <%= @movie.year%> || <%= @movie.age%> || <%= @movie.hour.to_s + " h " + @movie.minute.to_s + " m"%>
+            </div>
+            <div class="row padding-all-xs">
+                <%= @movie.description%>
+            </div>
+            <div class="row padding-all-xs">
+                Directed by : <%= @movie.director%>
+            </div>
+            <div class="row padding-all-xs">
+                Starring : 
+                <%= @movie.starring.join(" , ")%>
+            </div>
+            <div class="row padding-all-xs">
+                Cast : 
+                <%= @movie.detail.cast.join(" , ")%>
+            </div>
+            <div class="row padding-all-xs">
+                Audio : 
+                <%= @movie.detail.audio.join(" , ")%>
+            </div>
+            <div class="row padding-all-xs">
+                Subtitle :
+                <%= @movie.detail.subtitle.join(" , ")%>
+            </div>
+            <div class="row padding-all-xs">
+                <%= content_tag("span",(link_to "Go back",:back,class:"btn btn-default"))%>
+                <% unless current_user.playlist.movies.include?(@movie)%>
+                    <span>
+                        <%= link_to "Add to playlist",movie_playlist_movies_path(@movie),method: :post,class:"btn btn-default"%>
+                    </span>
+                <% else %>
+                    <button class="btn btn-default">Already added to playlist!</button>
+                <% end %>
+            </div>
         </div>
-        <div class="row padding-all-xs">
-            <%= @movie.year%> || <%= @movie.age%> || <%= @movie.hour.to_s + " h " + @movie.minute.to_s + " m"%>
+        <div class="col-md-2">
+            <%= content_tag("div",(link_to "Watch alone",watch_alone_movie_path(@movie),class:"btn btn-default margin-bottom-xs"))%>
+            <%= content_tag("div",(link_to "Watch with friends",watch_with_friends_movie_path(@movie),class:"btn btn-default margin-bottom-xs"))%>
         </div>
-        <div class="row padding-all-xs">
-            <%= @movie.description%>
-        </div>
-        <div class="row padding-all-xs">
-            Directed by : <%= @movie.director%>
-        </div>
-        <div class="row padding-all-xs">
-            Starring : 
-            <%= @movie.starring.join(" , ")%>
-        </div>
-        <div class="row padding-all-xs">
-            Cast : 
-            <%= @movie.detail.cast.join(" , ")%>
-        </div>
-        <div class="row padding-all-xs">
-            Audio : 
-            <%= @movie.detail.audio.join(" , ")%>
-        </div>
-        <div class="row padding-all-xs">
-            Subtitle :
-            <%= @movie.detail.subtitle.join(" , ")%>
-        </div>
-        <div class="row padding-all-xs">
-            <%= content_tag("span",(link_to "Go back",:back,class:"btn btn-default"))%>
-            <% unless current_user.playlist.movies.include?(@movie)%>
-                <span>
-                    <%= link_to "Add to playlist",movie_playlist_movies_path(@movie),method: :post,class:"btn btn-default"%>
-                </span>
-            <% else %>
-                <button class="btn btn-default">Already added to playlist!</button>
-            <% end %>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <%= content_tag("div",(link_to "Watch alone",watch_alone_movie_path(@movie),class:"btn btn-default margin-bottom-xs"))%>
-        <%= content_tag("div",(link_to "Watch with friends",watch_with_friends_movie_path(@movie),class:"btn btn-default margin-bottom-xs"))%>
     </div>
 </div>
 <script>

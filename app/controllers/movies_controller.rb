@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-    before_action :get_movie,only:[:show,:watch_alone]
+    before_action :get_movie,only:[:show,:watch_alone,:watch_with_friends,:create_invitation,:accept_invitation,:verify_invitation,:watch_together]
     helper_method :get_session
     
     def new
@@ -42,7 +42,48 @@ class MoviesController < ApplicationController
     def watch_with_friends
         current_user.movies << @movie unless current_user.movies.include?(@movie)
     end
-  
+    
+    def create_invitation
+        @random_string = SecureRandom.hex(5) + "w=#{params[:id]}"
+        @invitation = current_user.invitations.create(movie: @movie,name:"#{current_user.full_name}-#{@movie.title}")
+        @invitation.friends << current_user
+        @invitation.create_room(name: @random_string)
+        session[:room_id] = @invitation.room.id
+        respond_to do |format|
+            format.js
+        end
+    end
+    
+    def accept_invitation
+        respond_to do |format|
+            format.js
+        end
+    end
+    
+    def verify_invitation
+        room = Room.find_by_name(params[:invitation_code])
+        if room && room.invitation.movie == @movie
+            unless room.invitation.friends.size > 5
+                room.invitation.friends << current_user unless room.invitation.friends.include?(current_user)
+                flash[:success] = "You have accepted the invitation #{room.invitation.name} created by #{room.invitation.user.full_name}"
+                redirect_to watch_together_movie_path(@movie,room: room.id)
+            else
+                flash[:danger] = "The invitation #{room.invitation.name} created by #{room.invitation.user.full_name} is full."
+                redirect_back(fallback_location: root_path)
+            end
+        else
+            flash[:danger] = "Invitation code is incorrect."
+            redirect_back(fallback_location: root_path)
+        end
+    end
+    
+    def watch_together
+        @room_id = params[:room]
+        @invitation = Room.find(@room_id).invitation
+        @friends = @invitation.friends
+        have_access_to_watch_together?
+    end
+    
     private
     def get_session(key)
         session[key]
@@ -60,5 +101,12 @@ class MoviesController < ApplicationController
     
     def get_movie
         @movie = Movie.find(params[:id])
+    end
+    
+    def have_access_to_watch_together?
+        unless @friends.include?(current_user)
+            flash[:danger] = "You are not invited."
+            redirect_back(fallback_location: root_path)
+        end
     end
 end

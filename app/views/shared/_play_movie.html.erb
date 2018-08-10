@@ -1,0 +1,98 @@
+<video width="100%" height="500" id="html-video" poster="<%= @movie.images[0].url%>" >
+  <source src="<%= @movie.video.url%>" type="video/mp4">
+</video>
+<div id="video-control" class="row padding-all-xs">
+    <div class="col-md-2" align="center">
+        <span onclick="video.play()" id="play" class="icons" style="margin:5px"><%= fa_icon "play-circle 2x"%> </span>
+        <span onclick="video.pause()" id="pause" class="icons" style="margin:5px"><%= fa_icon "pause-circle 2x"%></span>
+        <span onclick="video.playback()" id="playback" class="icons" style="margin:5px"><%= fa_icon "undo 2x"%></span>
+    </div>
+    <div class="col-md-6" style="display:flex;align-items: center;justify-content: space-around;">
+        <div id="time-passed"></div>
+        <div id="progress-bar-bg" style="display:flex;align-items: center;padding:2px;">
+            <div id="progress-bar">
+            </div>
+        </div>
+        <div id="time-left"></div>
+    </div>
+    <div class="col-md-4" class="flex-container" style="display:flex;align-items: center;justify-content: space-around;">
+        <div onclick="video.mute()" id="volume1" class="icons"><%= fa_icon "volume-up 2x"%></div>
+        <div onclick="video.mute()" id="volume2" class="icons hidden"><%= fa_icon "volume-off 2x"%></div>
+        <div id="volume-bar-bg" style="display:flex;align-items: center;padding:2px;">
+            <div id="volume-bar">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row padding-all-sm">
+    <div class="col-md-12">
+        <div class="owl-carousel">
+            <% @movie.images.each do |image|%>
+                <div><%= image_tag image.url%></div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <%= content_tag "div",@movie.title%>
+        <%= content_tag "div",@movie.description%>
+        <div>
+            <%= link_to "Go Back",:back,class:"btn btn-default"%>
+        </div>
+    </div>
+</div>
+<script>
+    $(".owl-carousel").owlCarousel({
+        items:3,
+        loop:true
+    });
+    var show_play_button = function(){
+        $('#play').show();
+        $('#pause').hide();
+    }
+    var show_pause_button = function(){
+        $('#play').hide();
+        $('#pause').show();
+    }
+    //Video object is created to use the method inside the video object to control the video 
+    let video = new Video();
+    video.time_change_event();
+    video.ended();
+    $('#time-passed').text("0.00")
+    $('#pause').hide()
+    $("video").click(function(){
+        if(this.paused == true){
+            this.play();
+            show_pause_button();
+        }else{
+            this.pause();
+            show_play_button();
+        }
+        
+    })
+    $('#volume-bar-bg').click(function(e){
+        let percent = e.offsetX / 200
+        video.setVolume(percent)
+    })
+    $('#progress-bar-bg').click(function(e){
+        let percent = e.offsetX / 400
+        video.setProgress(percent)
+    })
+    $('#play').click(function(){
+        show_pause_button();
+    })
+    $("#pause").click(function(){
+        show_play_button();
+    })
+    $("#volume1").click(function(){
+        $("#volume2").removeClass('hidden');
+        $("#volume1").addClass('hidden')
+    })
+    $('#volume2').click(function(){
+        $('#volume2').addClass('hidden')
+        $('#volume1').removeClass('hidden')
+    })
+    
+    
+</script>

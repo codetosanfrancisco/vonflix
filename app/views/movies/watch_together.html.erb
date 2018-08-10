@@ -1,0 +1,26 @@
+<div id="wrapper">
+    <div class="row">
+        <h2 class="text-center">Watch Together : <span class="font-color-red"><%= @movie.title %></span><span id="friends-watching"></span></h2>
+    </div>
+    <div class="row">
+        <div class="col-md-9" data-room-id="<%= @room_id %>">
+            <%= render "shared/play_movie"%>
+        </div>
+        <div class="col-md-3">
+            <div class="panel black-background red-border" style="margin-top:10px;">
+                <div class="panel-heading red-background">Chat with friends : </div>
+                <div class="panel-body" style="height:500px;" id="chat">
+                  <div class="grey-background" style="border-radius:5px;padding:5px;">
+                      Basic panel example
+                  </div>
+                 </div>
+                 <div class="panel-heading red-background">
+                     <%= form_tag :messages do %>
+                             <%= text_field_tag :message,nil,class:"form-control"%>
+                             <%= submit_tag "Post",class:"btn black-background form-control margin-top-sm"%>
+                     <% end %>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
