@@ -4,18 +4,22 @@
       <p><%= truncate(@sample.description,length:200)%></p>
       <p><%= link_to "Show more",movie_path(@sample),class:"btn btn-lg btn-default"%></p>
     </div>
-    <div class="owl-carousel">
-        <% @movies.each do |movie|%>
-            <div>
-                <%= content_tag "div",(image_tag movie.images[-1].url)%>
-                <%= content_tag "div",movie.title%>
-                <%= content_tag "div",truncate(movie.description,length:100)%>
-                <%= link_to "See More",movie_path(movie),class:"font-color-red"%>
-            </div>
-        <% end %>
+    <div>
+        <h3 class="btn btn-default font-md margin-bottom-xs">Popular on Vonflix  </h3>
+        <div class="owl-carousel">
+            <% @movies.each do |movie|%>
+                <div>
+                    <%= content_tag "div",(image_tag movie.images[-1].url)%>
+                    <%= content_tag "div",movie.title%>
+                    <%= content_tag "div",truncate(movie.description,length:100)%>
+                    <%= link_to "See More",movie_path(movie),class:"font-color-red"%>
+                </div>
+            <% end %>
+        </div>
     </div>
+    
     <div class="padding-all-sm">
-        <h3 class="btn btn-default font-md margin-bottom-xs">Latest News : </h3>
+        <h3 class="btn btn-default font-md margin-bottom-xs">Latest Featured News </h3>
         <div id="news" class="flexslider" style="border:0;background-color:#141414;">
             <ul class="slides" id="news-slider">
             </ul>
@@ -40,7 +44,7 @@
     var news = $('#news');
     var url = 'https://newsapi.org/v2/everything?' +
           'q=hollywood&' +
-          'from=2018-08-10&' +
+          'from=<%= Date.today %>&' +
           'sortBy=popularity&' +
           'apiKey=<%= ENV["NEWS_FEED_API"]%>';
 
@@ -48,7 +52,7 @@
         let articles = data.articles
         let articles_array = []
         let i = 0;
-        while(i < 20){
+        while(i < (Math.ceil(articles.length/2))){
             $('#news-slider').append(`
             <li>
                 <div>
