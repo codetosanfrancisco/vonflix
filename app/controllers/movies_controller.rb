@@ -65,6 +65,7 @@ class MoviesController < ApplicationController
         if room && room.invitation.movie == @movie
             unless room.invitation.friends.size > 5
                 room.invitation.friends << current_user unless room.invitation.friends.include?(current_user)
+                session[:room_id] = room.id
                 flash[:success] = "You have accepted the invitation #{room.invitation.name} created by #{room.invitation.user.full_name}"
                 redirect_to watch_together_movie_path(@movie,room: room.id)
             else
@@ -82,6 +83,14 @@ class MoviesController < ApplicationController
         @invitation = Room.find(@room_id).invitation
         @friends = @invitation.friends
         have_access_to_watch_together?
+    end
+    
+    def friends_watching
+        @invitation_id = params[:i]
+        @count = Invitation.find(@invitation_id).friends.size
+        respond_to do |format|
+            format.json { render json: @count }
+        end
     end
     
     private

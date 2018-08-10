@@ -1,21 +1,27 @@
 <div id="wrapper">
     <div class="row">
-        <h2 class="text-center">Watch Together : <span class="font-color-red"><%= @movie.title %></span><span id="friends-watching"></span></h2>
+        <div class="text-center"><small><span id="friends-watching"></span></small></div>
+        <h2 class="text-center">Watch Together : <span class="font-color-red"><%= @movie.title %></span></h2>
     </div>
     <div class="row">
-        <div class="col-md-9" data-room-id="<%= @room_id %>">
+        <div class="col-md-9" data-room =<%= current_room.id %> id="room_id">
             <%= render "shared/play_movie"%>
         </div>
         <div class="col-md-3">
             <div class="panel black-background red-border" style="margin-top:10px;">
                 <div class="panel-heading red-background">Chat with friends : </div>
                 <div class="panel-body" style="height:500px;" id="chat">
-                  <div class="grey-background" style="border-radius:5px;padding:5px;">
-                      Basic panel example
-                  </div>
+                      <% if current_room.messages.any? %>
+                          <% current_room.messages.order("created_at DESC").limit(10).each do |m|%>
+                              <div class="grey-background margin-bottom-xs" style="border-radius:5px;padding:5px;" id="messages">
+                                 <div><%= m.message %></div>
+                                 <div><small>"<%= m.user.full_name%>"</small></div>
+                            </div>
+                          <% end %>
+                      <% end %>
                  </div>
                  <div class="panel-heading red-background">
-                     <%= form_tag :messages do %>
+                     <%= form_tag :messages,remote:true,method: :post do %>
                              <%= text_field_tag :message,nil,class:"form-control"%>
                              <%= submit_tag "Post",class:"btn black-background form-control margin-top-sm"%>
                      <% end %>
@@ -24,3 +30,19 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    var invitation_id = <%= @invitation.id %>
+    var count = 0;
+    var getFriendsWatching = function(){
+        if(count <= 5){
+            $.get(`/movies/friends_watching?i=${invitation_id}`,function(data){
+                count = parseInt(data)
+                $('#friends-watching').text(`${data} friends watching.`)
+            },'json')
+        }
+    }
+    setInterval(getFriendsWatching, 5000)
+    
+</script>

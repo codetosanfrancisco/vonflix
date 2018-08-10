@@ -22,6 +22,7 @@ gem 'owlcarousel-rails'
 gem 'clipboard-rails'
 gem 'figaro'
 gem 'flex-slider-rails'
+gem 'warden'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

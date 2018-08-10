@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :authenticate_user!
     
-    helper_method :signed_in?,:current_user
+    helper_method :signed_in?,:current_user,:current_room
     private 
     def authenticate_user!
         redirect_to root_path unless session[:user_id]

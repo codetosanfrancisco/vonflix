@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'messages/create'
-  get 'histories/create'
-  get 'watch/watch_alone'
-  get 'watch/watch_with_friends'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   
@@ -10,6 +6,7 @@ Rails.application.routes.draw do
   resources :movies do
     collection do
       get 'before_new'
+      get 'friends_watching'
     end
     member do
       get 'create_invitation'
@@ -23,7 +20,7 @@ Rails.application.routes.draw do
   end
   
   resources :playlists,only:[:show]
-  resources :messages,only: [:create]
+  resources :messages,only:[:create]
   #Dashboard path
   get "dashboard/users",to:"dashboard#user",as: :user_dashboard
   get "dashboard/myhistory",to:"dashboard#my_history",as: :my_history
@@ -35,4 +32,5 @@ Rails.application.routes.draw do
   post "signin",to: "session#create"
   delete "signout",to:"session#destroy"
   
+  mount ActionCable.server, at: '/cable'
 end
