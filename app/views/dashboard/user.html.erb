@@ -20,6 +20,9 @@
     
     <div class="padding-all-sm">
         <h3 class="btn btn-default font-md margin-bottom-xs">Latest Featured News </h3>
+        <div align="center" id="preloader">
+            <%= image_tag "25.gif"%>
+        </div>
         <div id="news" class="flexslider" style="border:0;background-color:#141414;">
             <ul class="slides" id="news-slider">
             </ul>
@@ -73,7 +76,11 @@
             minItems: 4,
             maxItems: 6
         });
+        
     },'json')
-
+    
+    $(document).ajaxComplete(function(){
+        $("#preloader").fadeOut(500);
+    })
     
 </script>
