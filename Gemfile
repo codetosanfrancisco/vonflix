@@ -20,6 +20,8 @@ gem "font-awesome-rails"
 gem "carrierwave"
 gem 'owlcarousel-rails'
 gem 'clipboard-rails'
+gem 'figaro'
+gem 'flex-slider-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
