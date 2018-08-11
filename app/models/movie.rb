@@ -2,7 +2,6 @@ class Movie < ApplicationRecord
     has_one :detail
     mount_uploader :video, VideoUploader
     mount_uploaders :images, ImageUploader
-    
     def self.search(thingy)
         array = thingy.split
         unless array.length > 1
