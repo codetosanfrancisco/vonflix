@@ -113,7 +113,7 @@ class MoviesController < ApplicationController
     
     
     def edit_or_delete
-        @movies = Movie.all    
+        @movies = Movie.all.paginate(:page => params[:page], :per_page => 10)    
     end
     
     def destroy

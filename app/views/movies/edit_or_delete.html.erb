@@ -1,2 +1,5 @@
 <%= link_to "Go Back",:back,class:"btn btn-default"%>
 <%= render "shared/movie_panel"%>
+<div align="center">
+    <%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
+</div>
