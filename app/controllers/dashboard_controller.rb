@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
     end
     
     def my_history
-        @movies = current_user.movies.paginate(:page => params[:page], :per_page => 10)
+        @movies = current_user.movies
     end
     
     def search
