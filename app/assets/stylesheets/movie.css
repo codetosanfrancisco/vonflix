@@ -13,10 +13,6 @@
     width: 0px;
     background-color: #e50914;
 }
-video,.icons{
-    cursor: pointer;
-}
-
 .hidden{
     visibility: hidden;
 }

@@ -170,3 +170,7 @@
 .flex-container{
     display:flex;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
