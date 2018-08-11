@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get 'before_new'
       get 'friends_watching'
+      get 'who_is_my_friends'
     end
     member do
       get 'create_invitation'

@@ -1,6 +1,6 @@
 <div id="wrapper">
     <div class="row">
-        <div class="text-center"><small><span id="friends-watching"></span></small></div>
+        <div class="text-center"><small><span id="friends-watching"></span></small><strong><small id="who-friends">See who's watching</small></strong></div>
         <h2 class="text-center">Watch Together : <span class="font-color-red"><%= @movie.title %></span></h2>
     </div>
     <div class="row">
@@ -35,6 +35,7 @@
 <script>
     var invitation_id = <%= @invitation.id %>
     var count = 0;
+    var string = "";
     var getFriendsWatching = function(){
         if(count <= 5){
             $.get(`/movies/friends_watching?i=${invitation_id}`,function(data){
@@ -45,4 +46,19 @@
     }
     setInterval(getFriendsWatching, 5000)
     
+    $("#who-friends").click(function(){
+        var i = 0;
+        $.get(`/movies/who_is_my_friends?i=${invitation_id}`,function(data){
+            while(i < data.length){
+                string += `${data[i]}\n`
+                i ++;
+            }
+        })
+        if(string != ""){
+            alert(string)
+        }else{
+            alert("No one is watching at the moment.")
+        }
+        
+    })
 </script>

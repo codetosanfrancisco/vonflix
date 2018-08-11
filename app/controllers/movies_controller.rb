@@ -25,10 +25,16 @@ class MoviesController < ApplicationController
     end
     
     def create
-        @movie = Movie.new(movie_params).save
-        Movie.last.create_detail(detail_params)
-        flash[:success] = "Movie is successfully added."
-        redirect_to admin_dashboard_path
+        @movie = Movie.new(movie_params)
+        if @movie.save
+            @movie.create_detail(detail_params)
+            flash[:success] = "Movie is successfully added."
+            redirect_to admin_dashboard_path
+        else
+            flash.now[:danger] = "Movies cannot be added."
+            render "before_new"
+        end
+        
     end
     
     def show
@@ -90,6 +96,16 @@ class MoviesController < ApplicationController
         @count = Invitation.find(@invitation_id).friends.size
         respond_to do |format|
             format.json { render json: @count }
+        end
+    end
+    
+    
+    def who_is_my_friends
+        @invitation = Invitation.find(params[:i])
+        friends = @invitation.friends
+        @friends_names = friends.collect(&:full_name)
+        respond_to do |format|
+            format.json { render json: @friends_names}
         end
     end
     
