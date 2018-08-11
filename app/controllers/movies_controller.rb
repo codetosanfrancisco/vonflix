@@ -118,7 +118,7 @@ class MoviesController < ApplicationController
     
     def destroy
        title = @movie.title
-       if movie.destroy
+       if @movie.destroy
            flash[:success] = "#{title} is successfully deleted."
            redirect_back(fallback_location: root_path)
        else

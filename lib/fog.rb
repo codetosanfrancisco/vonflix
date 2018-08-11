@@ -1,3 +1,3 @@
 module Fog
-  # no content
+  # :D
 end
