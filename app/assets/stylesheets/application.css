@@ -52,6 +52,9 @@
 .margin-top-sm{
     margin-top:10px;
 }
+.margin-top-xs{
+    margin-top:5px;
+}
 .margin-bottom-xs{
     margin-bottom:5px;
 }
@@ -173,4 +176,7 @@
 
 .cursor-pointer{
     cursor: pointer;
+}
+.display-none{
+    display:none;
 }

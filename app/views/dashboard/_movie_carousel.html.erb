@@ -1,0 +1,10 @@
+<div class="owl-carousel">
+    <% @movies.each do |movie|%>
+        <div>
+            <%= content_tag "div",(image_tag movie.images[-1].url)%>
+            <%= content_tag "div",movie.title%>
+            <%= content_tag "div",truncate(movie.description,length:100)%>
+            <%= link_to "See More",movie_path(movie),class:"font-color-red"%>
+        </div>
+    <% end %>
+</div>

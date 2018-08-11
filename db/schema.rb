@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_103413) do
+ActiveRecord::Schema.define(version: 2018_08_11_103038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 2018_08_10_103413) do
   end
 
   create_table "details", force: :cascade do |t|
-    t.text "adjective", default: [], array: true
     t.text "audio", default: [], array: true
     t.text "subtitle", default: [], array: true
     t.text "cast", default: [], array: true
     t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "adjective"
     t.index ["movie_id"], name: "index_details_on_movie_id"
   end
 

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'before_new'
       get 'friends_watching'
       get 'who_is_my_friends'
+      get 'edit_or_delete'
     end
     member do
       get 'create_invitation'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
       get "watch_with_friends"
       post "verify_invitation"
       get "watch_together"
+      get "destroy_photo"
+      get "destroy_video"
     end
     resources :playlist_movies,only:[:create]
   end

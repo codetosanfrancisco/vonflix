@@ -6,8 +6,13 @@
           <% if signed_in? %>
             <div class="padding-all-sm row">
               <span class="padding-side-sm col-md-6"><%= fa_icon "user"%> <%= current_user.full_name%> </span>
-              <span class="padding-side-sm col-md-3"><%= link_to "My Playlist",playlist_path(current_user.playlist),class:"font-color-red"%></span>
-              <span class="padding-side-sm col-md-3"><%= link_to "My History",my_history_path,class:"font-color-red"%></span>
+              <% if show_user?%>
+                <span class="padding-side-sm col-md-3"><%= link_to "My Playlist",playlist_path(current_user.playlist),class:"font-color-red"%></span>
+                <span class="padding-side-sm col-md-3"><%= link_to "My History",my_history_path,class:"font-color-red"%></span>
+              <% elsif show_admin? %>
+                <span class="padding-side-sm col-md-3"><%= link_to "Add New Movie",before_new_movies_path,class:"font-color-red"%></span>
+                <span class="padding-side-sm col-md-3"><%= link_to "Edit/Delete Movie",edit_or_delete_movies_path,class:"font-color-red"%></span>
+              <% end %>
             </div>
           <% end %>
         </div>

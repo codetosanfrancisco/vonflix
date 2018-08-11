@@ -1,5 +1,7 @@
 class MoviesController < ApplicationController
-    before_action :get_movie,only:[:show,:watch_alone,:watch_with_friends,:create_invitation,:accept_invitation,:verify_invitation,:watch_together]
+    before_action :get_movie,only:[:show,:watch_alone,:watch_with_friends,:create_invitation,:accept_invitation,
+    :verify_invitation,:watch_together,:destroy,:edit,:destroy_video,:destroy_photo,:update]
+    before_action :is_admin?,only:[:new,:before_new,:create,:edit_or_delete,:update,:edit,:destroy]
     helper_method :get_session
     
     def new
@@ -109,6 +111,45 @@ class MoviesController < ApplicationController
         end
     end
     
+    
+    def edit_or_delete
+        @movies = Movie.all    
+    end
+    
+    def destroy
+       title = @movie.title
+       if movie.destroy
+           flash[:success] = "#{title} is successfully deleted."
+           redirect_back(fallback_location: root_path)
+       else
+           flash[:danger] = "Fail to delete #{title}"
+           redirect_back(fallback_location: root_path)
+       end
+    end
+    
+    def edit
+            
+    end
+    
+    def update
+        @movie.update(edit_movie_params)
+        @movie.update(video: params[:movie][:video]) if params[:movie][:video]
+        @movie.images += params[:movie][:images] if params[:movie][:images]
+        @movie.save
+        @movie.detail.update(edit_detail_params)
+        redirect_back(fallback_location: root_path)
+    end
+    
+    def destroy_photo
+        i_to_delete = params[:p].to_i
+        @movie['images'].delete_at(i_to_delete) # remove from images array
+        @movie.save
+    end
+    
+    def destroy_video
+        @movie.update(video: nil)
+    end
+    
     private
     def get_session(key)
         session[key]
@@ -124,6 +165,16 @@ class MoviesController < ApplicationController
         cast: params[:movie][:movie_detail][:cast]}
     end
     
+    def edit_detail_params
+        {adjective: params[:adjective],audio: params[:audio],subtitle: params[:subtitle],
+        cast: params[:cast]}
+    end
+    
+    def edit_movie_params
+        {title: params[:movie][:title],year: params[:movie][:year],age: params[:movie][:age],hour: params[:movie][:hour],minute: params[:movie][:minute],
+        description: params[:movie][:description],starring: params["starring"],director: params[:movie][:director]}
+    end
+    
     def get_movie
         @movie = Movie.find(params[:id])
     end
@@ -134,4 +185,20 @@ class MoviesController < ApplicationController
             redirect_back(fallback_location: root_path)
         end
     end
+    
+    def is_admin?
+        unless current_user.admin?
+            flash[:danger] = "You are not authorized to enter this page."
+            redirect_back(fallback_location: root_path)
+        end
+    end
+    
+    def is_admin?
+        unless current_user.admin?
+            flash[:danger] = "You are not authorized to enter this page."
+            redirect_back(fallback_location: root_path)
+        end
+    end
+    
+    
 end

@@ -6,16 +6,7 @@
     </div>
     <div>
         <h3 class="btn btn-default font-md margin-bottom-xs">Popular on Vonflix  </h3>
-        <div class="owl-carousel">
-            <% @movies.each do |movie|%>
-                <div>
-                    <%= content_tag "div",(image_tag movie.images[-1].url)%>
-                    <%= content_tag "div",movie.title%>
-                    <%= content_tag "div",truncate(movie.description,length:100)%>
-                    <%= link_to "See More",movie_path(movie),class:"font-color-red"%>
-                </div>
-            <% end %>
-        </div>
+        <%= render "movie_carousel"%>
     </div>
     
     <div class="padding-all-sm">
