@@ -1,7 +1,3 @@
-require 'carrierwave/storage/abstract'
-require 'carrierwave/storage/file'
-require 'carrierwave/storage/fog'
-
 CarrierWave.configure do |config|
   config.fog_provider = 'fog/aws'                        # required
   config.fog_credentials = {
@@ -10,5 +6,5 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY_ID'],                        # required
     region:                'eu-west-1',                  # optional, defaults to 'us-east-1'
   }
-  config.fog_directory  = ENV['S3_BUCKET_NAME']            # required
+  config.fog_directory  = 'vonflix'            # required
 end
