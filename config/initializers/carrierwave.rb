@@ -8,7 +8,6 @@
 #   }
 #   config.fog_directory  = 'vonflix'            # required
 # end
-
 CarrierWave.configure do |config|
 
   if Rails.env.development? || Rails.env.test?
