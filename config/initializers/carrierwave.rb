@@ -25,7 +25,7 @@ CarrierWave.configure do |config|
       region: 'us-east-2',
       endpoint: 'https://s3.amazonaws.com'
     }
-    config.fog_directory = 'voonflix'
+    config.fog_directory = 'vonflix'
     config.fog_public = false
     config.storage = :fog
   end
