@@ -44,10 +44,12 @@ class MoviesController < ApplicationController
     end
     
     def watch_alone
+        @movie.update(view: @movie.view + 1)
         current_user.movies << @movie unless current_user.movies.include?(@movie)
     end
     
     def watch_with_friends
+        @movie.update(view: @movie.view + 1)
         current_user.movies << @movie unless current_user.movies.include?(@movie)
     end
     

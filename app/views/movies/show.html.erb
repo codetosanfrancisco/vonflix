@@ -13,6 +13,9 @@
                 <%= @movie.year%> || <%= @movie.age%> || <%= @movie.hour.to_s + " h " + @movie.minute.to_s + " m"%>
             </div>
             <div class="row padding-all-xs">
+                <span> Views : <%= pluralize(@movie.view,'view') %></span>
+            </div>
+            <div class="row padding-all-xs">
                 <%= @movie.description%>
             </div>
             <div class="row padding-all-xs">

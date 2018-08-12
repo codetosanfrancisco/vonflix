@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_103038) do
+ActiveRecord::Schema.define(version: 2018_08_12_024357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2018_08_11_103038) do
     t.integer "hour"
     t.integer "minute"
     t.text "starring", default: [], array: true
-    t.integer "view"
+    t.integer "view", default: 0
     t.text "genres", default: [], array: true
     t.string "director"
     t.text "description"
