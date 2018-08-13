@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
     has_one :detail
-    has_many :histories,dependent: :detsroy
+    has_many :histories,dependent: :destroy
     validates :title,:description,:video,:images,presence:true
     mount_uploader :video, VideoUploader
     mount_uploaders :images, ImageUploader
