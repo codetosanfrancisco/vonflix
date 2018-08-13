@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "UserSignsUps", type: :feature do
+  before do
+    @movie = Movie.create(title:"vxvxgvfdxgvf",description:"fefewfewsfesf",video: 'video.mp4',images:['favicon.png'])
+  end
   scenario "user signs up with valid credential" do
       visit root_path
       
@@ -30,7 +33,8 @@ RSpec.feature "UserSignsUps", type: :feature do
       
       click_button "Sign up"
       
-      expect(page).to have_content("Oops, couldn't create account. Please make sure you are using a valid email and password and try again.")
+      expect(page).to have_content("error")
+      expect(page).to have_content("prevent")
   end
   
   scenario "password and password confirmation not the same" do
@@ -45,7 +49,6 @@ RSpec.feature "UserSignsUps", type: :feature do
       
       click_button "Sign up"
       
-      expect(page).to have_content("Oops, couldn't create account. Please make sure you are using a valid email and password and try again.")
       expect(page).to have_content("Lastname can't be blank")
       expect(page).to have_content("Email can't be blank")
   end

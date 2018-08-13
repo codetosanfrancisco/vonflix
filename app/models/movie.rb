@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
     has_one :detail
+    validates :title,:description,:video,:images,presence:true
     mount_uploader :video, VideoUploader
     mount_uploaders :images, ImageUploader
     def self.search(thingy)

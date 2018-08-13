@@ -4,6 +4,7 @@ RSpec.feature "UserSignsIns", type: :feature do
   before do
       @user = User.new(firstname:"James",lastname:"Mahathir",email:"james@gmail.com",password:"password",password_confirmation:"password")
       @user.save
+      @movie = Movie.create(title:"vxvxgvfdxgvf",description:"fefewfewsfesf",video:'video', images: ['image'])
   end
   scenario "a signed-up user can sign in successfully" do
       visit root_path

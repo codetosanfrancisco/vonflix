@@ -5,6 +5,7 @@ RSpec.feature "AdminSignsIns", type: :feature do
       @user = User.new(firstname:"James",lastname:"Mahathir",email:"james@gmail.com",password:"password",password_confirmation:"password")
       @user.role = 1
       @user.save
+      @movie = Movie.create(title:"vxvxgvfdxgvf",description:"fefewfewsfesf",video: 'video.mp4',images:['favicon.png'])
   end
   
   scenario "admin able to sign in to admin dashboard" do
