@@ -4,3 +4,5 @@
 *.mp4
 /test
 /spec
+/public/uploads/movie/images/*/*.jpg
+/public/uploads/movie/images/*/*.png
