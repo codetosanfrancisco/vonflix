@@ -1,12 +1,13 @@
-CarrierWave.configure do |config|
-  config.fog_provider = 'fog/aws'                        # required
-  config.fog_credentials = {
-    provider:              'AWS',                        # required
-    aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        # required
-    aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY_ID']
-  }
-  config.fog_directory  = 'vonflix'            # required
-end
+# CarrierWave.configure do |config|
+#   config.fog_provider = 'fog/aws'                        # required
+#   config.fog_credentials = {
+#     provider:              'AWS',                        # required
+#     aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        # required
+#     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY_ID'],
+#     region:'ap-southeast-1'
+#   }
+#   config.fog_directory  = 'vonflix'            # required
+# end
 # require 'carrierwave/storage/abstract'
 # require 'carrierwave/storage/file'
 # require 'carrierwave/storage/fog'
@@ -29,3 +30,13 @@ end
 #     config.storage = :fog
 #   end
 # end
+CarrierWave.configure do |config|
+  config.fog_provider = "fog/aws"
+  config.fog_credentials = {
+    provider:           'AWS',
+    aws_access_key_id:     ENV["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY_ID"],
+  }
+  config.fog_directory  = 'vonflix'
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
+end

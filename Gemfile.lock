@@ -69,6 +69,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-video-thumbnailer (0.1.4)
+      carrierwave
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (1.2.0)
@@ -263,6 +265,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15, < 4.0)
   carrierwave
+  carrierwave-video-thumbnailer
   chromedriver-helper
   clipboard-rails
   coffee-rails (~> 4.2)
