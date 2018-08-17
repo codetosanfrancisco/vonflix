@@ -4,6 +4,10 @@ class Movie < ApplicationRecord
     validates :title,:description,:video,:images,presence:true
     mount_uploader :video, VideoUploader
     mount_uploaders :images, ImageUploader
+    
+    
+    
+    
     def self.search(thingy)
         array = thingy.split
         unless array.length > 1

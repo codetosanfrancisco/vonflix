@@ -3,16 +3,29 @@
 </video>
 <div id="video-control" class="row padding-all-xs">
     <div class="col-md-2" align="center">
-        <span onclick="video.play()" id="play" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "play-circle 2x"%> </span>
-        <span onclick="video.pause()" id="pause" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "pause-circle 2x"%></span>
-        <span onclick="video.playback()" id="playback" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "undo 2x"%></span>
+        <% if params[:action] == 'watch_alone'%>
+            <span onclick="video.play()" id="play" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "play-circle 2x"%> </span>
+            <span onclick="video.pause()" id="pause" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "pause-circle 2x"%></span>
+            <span onclick="video.playback()" id="playback" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "undo 2x"%></span>
+        <% else %>
+            <span onclick="video.play()" id="play-together" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "play-circle 2x"%> </span>
+            <span onclick="video.pause()" id="pause-together" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "pause-circle 2x"%></span>
+            <span onclick="video.playback()" id="playback-together" class="icons cursor-pointer" style="margin:5px"><%= fa_icon "undo 2x"%></span>
+        <% end %>
     </div>
     <div class="col-md-6" style="display:flex;align-items: center;justify-content: space-around;">
         <div id="time-passed"></div>
-        <div id="progress-bar-bg" style="display:flex;align-items: center;padding:2px;">
-            <div id="progress-bar">
+        <% if params[:action] == 'watch_alone'%>
+           <div id="progress-bar-bg" style="display:flex;align-items: center;padding:2px;">
+                <div id="progress-bar">
+                </div>
             </div>
-        </div>
+        <% else %>
+            <div id="progress-bar-bg" style="display:flex;align-items: center;padding:2px;">
+                <div id="progress-bar">
+                </div>
+            </div>
+        <% end %>
         <div id="time-left"></div>
     </div>
     <div class="col-md-4" class="flex-container" style="display:flex;align-items: center;justify-content: space-around;">
@@ -43,6 +56,19 @@
     </div>
 </div>
 <script>
+    let data = $('#room_id').data('room')
+    $('#play-together').click(function(){
+        $.get(`/movies/play?room_id=${data}`,function(){},'js')
+    })
+    
+    $('#pause-together').click(function(){
+        $.get(`/movies/pause?room_id=${data}`,function(){},'js')
+    })
+    
+    $('#playback-together').click(function(){
+        $.get(`/movies/playback?room_id=${data}`,function(){},'js')
+    })
+    
     $(".owl-carousel").owlCarousel({
         items:3,
         loop:true
@@ -50,10 +76,14 @@
     var show_play_button = function(){
         $('#play').show();
         $('#pause').hide();
+        $('#play-together').show();
+        $('#pause-together').hide();
     }
     var show_pause_button = function(){
         $('#play').hide();
         $('#pause').show();
+        $('#play-together').hide();
+        $('#pause-together').show();
     }
     //Video object is created to use the method inside the video object to control the video 
     let video = new Video();
@@ -61,16 +91,27 @@
     video.ended();
     $('#time-passed').text("0.00")
     $('#pause').hide()
+    
     $("video").click(function(){
         if(this.paused == true){
-            this.play();
+            $.get(`/movies/play?room_id=${data}`,function(){},'js')
+        }else{
+            $.get(`/movies/pause?room_id=${data}`,function(){},'js')
+        }
+        
+    })
+    
+    $("video").click(function(){
+        if(this.paused == true){
+            video.play();
             show_pause_button();
         }else{
-            this.pause();
+            video.pause()
             show_play_button();
         }
         
     })
+    
     $('#volume-bar-bg').click(function(e){
         let percent = e.offsetX / 200
         video.setVolume(percent)
@@ -79,6 +120,12 @@
         let percent = e.offsetX / 400
         video.setProgress(percent)
     })
+    
+    $('#progress-bar-bg').click(function(e){
+        let percent = e.offsetX / 400
+        $.get(`/movies/progress?room_id=${data}`,{progress: percent},function(){},'js')
+    })
+    
     $('#play').click(function(){
         show_pause_button();
     })

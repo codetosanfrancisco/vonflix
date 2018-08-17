@@ -15,4 +15,5 @@ class MessagesChannel < ApplicationCable::Channel
   def checkOut
     stop_all_streams
   end
+  
 end

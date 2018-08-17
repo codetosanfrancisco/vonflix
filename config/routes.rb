@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       get 'friends_watching'
       get 'who_is_my_friends'
       get 'edit_or_delete'
+      get 'play'
+      get 'pause'
+      get 'playback'
+      get 'progress'
     end
     member do
       get 'create_invitation'

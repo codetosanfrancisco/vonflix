@@ -27,8 +27,9 @@ class MoviesController < ApplicationController
     end
     
     def create
+        byebug
         @movie = Movie.new(movie_params)
-        if @movie.save
+        if @movie.save!
             @movie.create_detail(detail_params)
             flash[:success] = "Movie is successfully added."
             redirect_to admin_dashboard_path
@@ -150,6 +151,30 @@ class MoviesController < ApplicationController
     
     def destroy_video
         @movie.update(video: nil)
+    end
+    
+    def play
+        respond_to do |format|
+            format.js { ActionCable.server.broadcast "play_channel_#{params[:room_id].to_i}","Play" }
+        end
+    end
+    
+    def pause
+        respond_to do |format|
+            format.js { ActionCable.server.broadcast "pause_channel_#{params[:room_id].to_i}","Pause" }
+        end
+    end
+    
+    def playback
+        respond_to do |format|
+            format.js { ActionCable.server.broadcast "playback_channel_#{params[:room_id].to_i}","Playback"}
+        end
+    end
+    
+    def progress
+       respond_to do |format|
+            format.js { ActionCable.server.broadcast "progress_channel_#{params[:room_id].to_i}",params["progress"]}
+        end
     end
     
     private
